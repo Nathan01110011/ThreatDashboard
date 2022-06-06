@@ -1,0 +1,93 @@
+.actions {
+  display: flex;
+
+  > * {
+    margin: 0 20px;
+  }
+}
+
+table {
+  width: 100%;
+}
+
+.columns {
+  display: flex;
+  flex-wrap: wrap;
+
+  > * {
+    flex-grow: 1;
+    align-items: flex-start;
+    margin: 20px;
+  }
+}
+
+.title-column {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  > * {
+    flex-grow: 1;
+    align-items: flex-start;
+    justify-content: space-around;
+    margin: 20px;
+  }
+}
+
+.details-container {
+  max-width: 500px;
+}
+
+.column-container {
+  max-width: 100%;
+}
+
+.shadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.mat-column-position {
+  width: 64px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.mat-column-mentions {
+  text-align: center;
+  cursor: default;
+}
+
+.mat-column-search {
+  width: 32px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.mat-chip-list {
+  display: inline-block;
+}
+
+.severity-1, .severity-2, .severity-3, .severity-4, .severity-5, .severity-6, .severity-7, .severity-8, .severity-9, .severity-10 {
+  color: white;
+}
+
+.severity-1, .severity-2 {
+  background-color: rgb(140, 218, 140);
+}
+.severity-3, .severity-4, .severity-5 {
+  background-color: rgb(228, 226, 135);
+}
+.severity-6, .severity-7, .severity-8 {
+  background-color: rgb(255, 200, 118);
+}
+.severity-9, .severity-10 {
+  background-color: rgb(255, 118, 118);
+}
+
+.trending-up {
+  color: rgb(140, 218, 140);
+}
+
+.trending-down {
+  color: rgb(255, 118, 118);
+}

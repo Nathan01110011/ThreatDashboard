@@ -1,0 +1,16 @@
+services:
+    db:
+        image: postgres
+        restart: always
+        environment:
+            POSTGRES_PASSWORD: Imperva_Pass
+            POSTGRES_USER: Imperva_User
+            POSTGRES_DB: CVE_Database
+        ports:
+            - 5432:5432
+
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 8080:8080

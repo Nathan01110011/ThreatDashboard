@@ -1,0 +1,23 @@
+<div *ngIf="vulnerability" class="columns">
+  <mat-card class="shadow details-container">
+    <div class="title-column">
+      <h2>{{ vulnerability.vulnerabilityId }}</h2>
+      <mat-chip-list *ngIf="vulnerability.cvssBaseScore">
+        <mat-chip [color]="severityColor(vulnerability.cvssBaseScore)"
+            class="severity-{{vulnerability.cvssBaseScore.toFixed(0)}}">
+            {{ vulnerability?.cvssBaseScore }}
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+    
+    <hr/>
+    <p> {{ vulnerability.vulnerabilityTitle }}</p>
+  </mat-card>
+  <mat-card class="shadow column-container">
+    <h2>Mentions per hour</h2>
+    <img src="/assets/mentions.png" />
+  
+  </mat-card>
+
+</div>
+

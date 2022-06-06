@@ -1,0 +1,124 @@
+<div class="actions">
+    <mat-button-toggle-group name="timeframe" #group="matButtonToggleGroup" aria-label="Font Style" value="day">
+        <mat-button-toggle value="bold" value="week">Last week</mat-button-toggle>
+        <mat-button-toggle value="italic" value="day">Last day</mat-button-toggle>
+        <mat-button-toggle value="underline" value="hour">Last hour</mat-button-toggle>
+    </mat-button-toggle-group>
+</div>
+
+<div class="columns">
+    <div>
+        <h2>Twitter mentions per CVE</h2>
+
+        <table mat-table [dataSource]="cves" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="cve">
+                <th mat-header-cell *matHeaderCellDef> CVE </th>
+                <td mat-cell *matCellDef="let element" [routerLink]="['/details', element.cve]">
+                    <a class="hyperlink">{{element.cve}}</a>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="severity">
+                <th mat-header-cell *matHeaderCellDef> Severity </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-chip-list>
+                        <mat-chip [color]="severityColor(element.severity)"
+                            class="severity-{{element.severity.toFixed(0)}}">
+                            {{element.severity.toFixed(1)}}
+                        </mat-chip>
+                    </mat-chip-list>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="trend">
+                <th mat-header-cell *matHeaderCellDef> Trend </th>
+                <td mat-cell *matCellDef="let element">
+
+                    <div *ngIf="element.trend === 0">
+                        <span class="material-icons trending-flat">
+                            trending_flat
+                        </span>
+                    </div>
+                    <div *ngIf="element.trend > 0">
+                        <span class="material-icons trending-up">
+                            trending_up
+                        </span>
+                    </div>
+                    <div *ngIf="element.trend < 0">
+                        <span class="material-icons trending-down">
+                            trending_down
+                        </span>
+                    </div>
+
+                </td>
+            </ng-container>
+
+
+
+            <ng-container matColumnDef="mentions">
+                <th mat-header-cell *matHeaderCellDef> Twitter mentions </th>
+                <td mat-cell *matCellDef="let element">
+                    <a href="https://twitter.com/search?q={{element.cve}}&src=typed_query&f=top" target="_blank"
+                        matTooltip="Twitter mentions for {{element.cve}}">{{element.mentions}}</a>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="search">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">
+                    <a href="https://www.google.com/search?q={{element.cve}}" target="_blank"
+                        matTooltip="Search google for {{element.cve}}">
+                        <span class="material-icons">
+                            search
+                        </span>
+                    </a>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="cveDisplayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: cveDisplayedColumns;"></tr>
+        </table>
+    </div>
+
+    <div>
+        <h2>Popular POC repositories</h2>
+
+        <table mat-table [dataSource]="pocs" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.name}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="repo">
+                <th mat-header-cell *matHeaderCellDef> Repo </th>
+                <td mat-cell *matCellDef="let element">
+                    <a href="{{element.repo}}" target="_blank">{{element.repo}}</a>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="stars">
+                <th mat-header-cell *matHeaderCellDef> Stars </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.stars}}
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="pocDisplayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: pocDisplayedColumns;"></tr>
+        </table>
+    </div>
+</div>

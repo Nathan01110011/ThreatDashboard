@@ -1,0 +1,46 @@
+version: '3.6'
+
+networks:
+  internal:
+
+volumes:
+  postgresdata:
+
+services:
+  # database:
+  #   image: postgres:14.1-alpine3.14
+  #   volumes:
+  #     - postgresdata:/var/lib/postgresql/data
+  #   deploy:
+  #     restart_policy:
+  #       condition: any
+  #     mode: replicated
+  #     replicas: 1
+  #   networks:
+  #     - internal
+  #   environment:
+  #     - POSTGRES_USER=admin
+  #     - POSTGRES_PASSWORD=password
+  server:
+    image: threat-dashboard-server:${SERVER_VERSION}
+    deploy:
+      restart_policy:
+        condition: any
+      mode: replicated
+      replicas: 2
+      update_config:
+        delay: 2s
+    networks:
+     - internal
+
+  client:
+    image: threat-dashboard-client:${CLIENT_VERSION}
+    deploy:
+      restart_policy:
+        condition: any
+      mode: replicated
+      replicas: 1
+      update_config:
+        delay: 2s
+    networks:
+     - internal
